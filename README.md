@@ -40,7 +40,10 @@ importing the brainfuck macro:
 use brainiac_22ccb748d608358e::brainfuck;
 
 fn main() {
-    brainfuck! { [This does absolutely nothing except make the compiler do extra work.] }
+    brainfuck! { 
+        [This will print "Hello World!"] 
+        ++++++++[>++++[>++>+++>+++>+< < < < -]>+>+>- > >+[<]< -]> >.>---.+++++++. .+++. > >.< -.<.+++.------.--------.> >+.>++.    
+    }
 }
 ```
 
