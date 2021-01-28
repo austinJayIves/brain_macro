@@ -30,3 +30,16 @@ There are several limitations due to how Rust interprets tokens in a macro:
 - `..` must be `. .`
 
 This ensures that there aren't any symbols in invalid locations.
+
+## Usage
+
+Usage should be as easy as adding the package to your `Cargo.toml` manifest and
+importing the brainfuck macro:
+
+```rust
+use brainiac_22ccb748d608358e::brainfuck;
+
+fn main() {
+    brainfuck! { [This does absolutely nothing except make the compiler do extra work.] }
+}
+```
