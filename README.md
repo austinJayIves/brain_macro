@@ -43,3 +43,8 @@ fn main() {
     brainfuck! { [This does absolutely nothing except make the compiler do extra work.] }
 }
 ```
+
+## Special Thanks
+
+To the [Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/index.html) for being an easy way to get started with macros in Rust,
+and to Wikipedia's Brainfuck page, for explaining the rules of the language, and for the documented examples.
