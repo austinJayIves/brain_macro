@@ -1,3 +1,16 @@
+//! This crate includes an implementation of the Brainfuck esoteric language as a macro rule.
+//!
+//! A couple of limitations apply:
+//! Anytime a series of characters encountered would be interpreted by the Rust compiler as a
+//! symbol, they need to be separated by a space.
+//!
+//! i.e:
+//! ">>" must be "> >"
+//! "->" must be "- >"
+//! "<<" must be "< <"
+//! "<-" must be "< -"
+//! ".." must be ". ."
+//!
 #[macro_export]
 macro_rules! brainfuck {
     (@start $($sym:tt)*) => {{
@@ -84,7 +97,17 @@ macro_rules! brainfuck {
         brainfuck!(@fuckery ($tape, $idx, $r, $w, $inc, $dec, $err); ($($tail)*));
     };
 
-    (@entry $($sym:tt)*) => {
+    // Invalid characters are ignored
+    (@fuckery ($tape:expr, $idx:expr, $r:expr, $w:expr, $inc:expr, $dec:expr, $err:expr); ($head:tt $($tail:tt)*)) => {
+        brainfuck!(@fuckery ($tape, $idx, $r, $w, $inc, $dec, $err); ($($tail)*));
+    };
+
+    // Ignore any "initial comment loops"
+    ([$($ignore:tt)*] $($sym:tt)*) => {
+        brainfuck!($($sym)*)
+    };
+
+    ($($sym:tt)*) => {
         brainfuck!(@start $($sym)*)
     }
 
